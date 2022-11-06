@@ -20,7 +20,7 @@ $(function () {
   // current hour in 24-hour time?
   //
 
-  
+
   // TODO: Add code to get any user input that was saved in localStorage and set
   // the values of the corresponding textarea elements. HINT: How can the id
   // attribute of each time-block be used to do this?
@@ -29,6 +29,6 @@ $(function () {
 
 
   // TODO: Add code to display the current date in the header of the page.
-  var date = dayjs().format('dddd, MMMM D, YYYY');
+  var date = dayjs().format('dddd, MMMM D, YYYY  h:mm a');
   $('#currentDay').text(date);
 });
