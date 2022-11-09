@@ -17,11 +17,39 @@ $(function () {
   // useful when saving the description in local storage?
   //
   
-  saveBtns.on('click', function () {
+  saveBtns.on('click', function () { //put saveProject function here later
     console.log('save button clicked');
     console.log(currentTime);  
     console.log(currentHour);  
   })
+
+  // function saveProject(event) {
+  //   event.preventDefault(); 
+
+  //   const projectObj { //create a larger array for all hours in the program so that updates are just updating the correct hour and not overriding each one
+  //     block: event.target.parent(); 
+  //     time: event.target.siblings('div').text; 
+  //     project: event.target.siblings('textarea'); 
+  //   }
+
+  //   let timeArray = []; 
+  //   timeArray.push(projectObj);
+  //   let storageManager = localStorage.getItem('storageManager'); 
+  //     if (!storageManager) {
+  //       return;
+  //     }
+  //   timeArray = JSON.parse(storageManager); 
+  //   for (let i=0; i < timeArray.length; i++) {
+
+  //   }
+  //   timeArray.push(storageManager); 
+  //   localStorage.setItem('storageManager', JSON.stringify(timeArray)); 
+  // }
+
+  // Get is so when you click the save button it traverses the DOM to get the text value and hours saved
+  // Can add data attributes
+  // When click save it goes to the parent and then traverse down to id and text value, stringify to save to local storage
+  // Use JSON.stringify 
 
 
   // TODO: Add code to apply the past, present, or future class to each time
@@ -31,17 +59,36 @@ $(function () {
   // current hour in 24-hour time?
   //
 
-  timeBlocks.foreach(function(i) {
-    if (id[i] < currentHour) {
-      timeBlocks.addClass('past'); 
-    } else if (id[i] == currentHour) {
-      timeBlocks.addClass('present'); 
-    } else {
-      timeBlocks.addClass('future'); 
-    }
-    
-  })
-  
+  function setBlockId() {
+      timeBlocks.each(function(i) {
+        let blockId = this.id; 
+        console.log(blockId); 
+        if (blockId < currentHour) {
+          timeBlocks.addClass('past'); 
+        } else if (blockId == currentHour) {
+          timeBlocks.addClass('present'); 
+        } else {
+          timeBlocks.addClass('future'); 
+        }
+      }); 
+  };
+
+  // function setTimeBlockClass() {
+  //   // timeBlocks.each(function(i) {
+  //     if (id < currentHour) {
+  //       timeBlocks.addClass('past'); 
+  //     } else if (id == currentHour) {
+  //       timeBlocks.addClass('present'); 
+  //     } else {
+  //       timeBlocks.addClass('future'); 
+  //     }
+      
+  //   };
+
+
+  setBlockId(); 
+
+
   // function getTime() {
   //   let currentTime = dayjs().format('h:mm'); 
   //   console.log(currentTime); 
