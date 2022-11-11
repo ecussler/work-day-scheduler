@@ -52,41 +52,20 @@ $(function () {
   // Use JSON.stringify 
 
 
-  // TODO: Add code to apply the past, present, or future class to each time
-  // block by comparing the id to the current hour. HINTS: How can the id
-  // attribute of each time-block be used to conditionally add or remove the
-  // past, present, and future classes? How can Day.js be used to get the
-  // current hour in 24-hour time?
-  //
-
-  function setBlockId() {
+  function setBlockColor() {
       timeBlocks.each(function(i) {
         let blockId = this.id; 
-        console.log(blockId); 
-        if (blockId < currentHour) {
-          timeBlocks.addClass('past'); 
-        } else if (blockId == currentHour) {
-          timeBlocks.addClass('present'); 
+        console.log(+blockId, currentHour); 
+        if (currentHour > +blockId) {
+          this.classList.add('past'); 
+        } else if (currentHour === +blockId) {
+          this.classList.add('present');         
         } else {
-          timeBlocks.addClass('future'); 
+          this.classList.add('future'); 
         }
       }); 
   };
 
-  // function setTimeBlockClass() {
-  //   // timeBlocks.each(function(i) {
-  //     if (id < currentHour) {
-  //       timeBlocks.addClass('past'); 
-  //     } else if (id == currentHour) {
-  //       timeBlocks.addClass('present'); 
-  //     } else {
-  //       timeBlocks.addClass('future'); 
-  //     }
-      
-  //   };
-
-
-  setBlockId(); 
 
 
   // function getTime() {
@@ -104,5 +83,6 @@ $(function () {
   // TODO: Add code to display the current date in the header of the page.
   var date = dayjs().format('dddd, MMMM D, YYYY  h:mm a');
   $('#currentDay').text(date);
+  setBlockColor(); 
 
 });
