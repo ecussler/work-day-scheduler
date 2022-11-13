@@ -8,6 +8,7 @@ $(function () {
   const saveBtns = $('.saveBtn'); 
   let currentTime = dayjs().format('h:mm'); 
   let currentHour = dayjs().get('h'); 
+  let timeArray = []; 
 
   // FUNCTION TO DISPLAY CURRENT DATE/TIME AT TOP OF PAGE
   var date = dayjs().format('dddd, MMMM D, YYYY  h:mm a');
@@ -39,30 +40,35 @@ $(function () {
   // useful when saving the description in local storage?
   //
   
+
+  function renderSavedProjects() {
+      let storedProjectArr = localStorage.getItem("storedObjs"); 
+      if (!storedProjectArr) {
+        return;
+      }
+    timeArray = JSON.parse(storedProjectArr); 
+    for (let i=0; i < timeArray.length; i++) {
+
+    }
+    timeArray.push(storedProjectArr); 
+    localStorage.setItem("storedObjs", JSON.stringify(timeArray)); 
+  }
+
   saveBtns.on('click', function (event) { 
     event.preventDefault(); 
     let target = $(event.target); 
 
     let projectObj = { //create a larger array for all hours in the program so that updates are just updating the correct hour and not overriding each one
-      blockId: target.parent.id, 
-      time: target.siblings('div').text, 
-      project: target.siblings('textarea')
+      blockId: target.parent, 
+      time: target.siblings("div").text, 
+      project: target.siblings("textarea")
     };
-
+  
     console.log(projectObj); 
-
-    let timeArray = []; 
+  
     timeArray.push(projectObj);
-    let storageManager = localStorage.getItem('storageManager'); 
-      if (!storageManager) {
-        return;
-      }
-    timeArray = JSON.parse(storageManager); 
-    for (let i=0; i < timeArray.length; i++) {
-
-    }
-    timeArray.push(storageManager); 
-    localStorage.setItem('storageManager', JSON.stringify(timeArray)); 
+    localStorage.setItem('storedObjs', JSON.stringify(projectObj)); 
+    renderSavedProjects(); 
     });
 
    
