@@ -6,9 +6,11 @@ $(function () {
   const rootEl = $('#root');
   const timeBlocks = $('.time-block'); 
   const saveBtns = $('.saveBtn'); 
+  const timeIds = $('.time-block'.id); 
+  const textDescrip = $('.description'); 
   let currentTime = dayjs().format('h:mm'); 
   let currentHour = dayjs().get('h'); 
-  let timeArray = []; 
+  let storedProjectArr = []; 
 
   // FUNCTION TO DISPLAY CURRENT DATE/TIME AT TOP OF PAGE
   var date = dayjs().format('dddd, MMMM D, YYYY  h:mm a');
@@ -21,7 +23,6 @@ $(function () {
   function setBlockColor() {
     timeBlocks.each(function(i) {
       let blockId = this.id; 
-      console.log(+blockId, currentHour); 
       // If statement uses time block ID (in 24hr) to determine which color to use
       if (currentHour > +blockId) {
         this.classList.add('past'); 
@@ -32,18 +33,12 @@ $(function () {
       }
     }); 
   };
-  // TODO: Add a listener for click events on the save button. This code should
-  // use the id in the containing time-block as a key to save the user input in
-  // local storage. HINT: What does `this` reference in the click listener
-  // function? How can DOM traversal be used to get the "hour-x" id of the
-  // time-block containing the button that was clicked? How might the id be
-  // useful when saving the description in local storage?
-  //
   
+  // RENDERS PREVIOUS PROJECT INPUTS UPON REFRESHING PAGE
 
   function renderSavedProjects() {
-      let storedProjectArr = localStorage.getItem("storedObjs"); 
-      if (!storedProjectArr) {
+      let renderSavedArr = localStorage.getItem("storedObjs"); 
+      if (!renderSavedArr) {
         return;
       }
     timeArray = JSON.parse(storedProjectArr); 
@@ -51,23 +46,28 @@ $(function () {
 
     }
     timeArray.push(storedProjectArr); 
-    localStorage.setItem("storedObjs", JSON.stringify(timeArray)); 
+    localStorage.setItem("projectObj", JSON.stringify(storedProjectArr)); 
   }
+
+  // ADDED EVENT LISTENER TO SAVE BUTTONS
+  // Input will be added to the local storage
 
   saveBtns.on('click', function (event) { 
     event.preventDefault(); 
     let target = $(event.target); 
-
-    let projectObj = { //create a larger array for all hours in the program so that updates are just updating the correct hour and not overriding each one
-      blockId: target.parent, 
-      time: target.siblings("div").text, 
-      project: target.siblings("textarea")
+    let parentId = target.parentNode.id; 
+    let projectObj = { //create a larger array for all hours in the program so that updates are just updating the correct hour and not overriding each one?
+      key: parentId, 
+      text: target.siblings(".description").value
+      // blockId: target.parent("id"),
+      // time: target.siblings("div").text, 
+      // project: target.siblings("textarea")
     };
   
     console.log(projectObj); 
   
-    timeArray.push(projectObj);
-    localStorage.setItem('storedObjs', JSON.stringify(projectObj)); 
+    storedProjectArr.add(projectObj);
+    localStorage.setItem('projectObj', JSON.stringify(projectObj)); 
     renderSavedProjects(); 
     });
 
@@ -76,14 +76,7 @@ $(function () {
   // Get is so when you click the save button it traverses the DOM to get the text value and hours saved
   // Can add data attributes
   // When click save it goes to the parent and then traverse down to id and text value, stringify to save to local storage
-  // Use JSON.stringify 
 
-
-
-  // TODO: Add code to get any user input that was saved in localStorage and set
-  // the values of the corresponding textarea elements. HINT: How can the id
-  // attribute of each time-block be used to do this?
-  //
 
 
 
