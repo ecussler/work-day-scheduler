@@ -5,8 +5,6 @@ $(function () {
 
   const timeBlocks = $('.time-block'); 
   const saveBtns = $('.saveBtn'); 
-  const timeIds = $('.time-block'.id); 
-  let currentTime = dayjs().format('h:mm'); 
   let currentHour = dayjs().get('h'); 
 
   // FUNCTION TO DISPLAY CURRENT DATE/TIME AT TOP OF PAGE
