@@ -40,26 +40,28 @@ $(function () {
     let project = $(this).siblings('.description').val(); 
     let timeId = $(this).parent().attr('id'); 
 
-    localStorage.setItem(project, timeId); 
+    localStorage.setItem(timeId, project); 
   }); 
 
+console.log(localStorage.getItem(7)); 
 
   // RENDERS PREVIOUS PROJECT INPUTS UPON REFRESHING PAGE
 
   $('#7').children(1).val(localStorage.getItem('7'));
-  $('#8 time-block').val(localStorage.getItem('8'));
-  $('#9 time-block').val(localStorage.getItem('9'));
-  $('#10 time-block').val(localStorage.getItem('10'));
-  $('#11 time-block').val(localStorage.getItem('11'));
-  $('#12 time-block').val(localStorage.getItem('12'));
-  $('#13 time-block').val(localStorage.getItem('13'));
-  $('#14 time-block').val(localStorage.getItem('14'));
-  $('#15 time-block').val(localStorage.getItem('15'));
-  $('#16 time-block').val(localStorage.getItem('16'));
-  $('#17 time-block').val(localStorage.getItem('17'));
-  $('#18 time-block').val(localStorage.getItem('18'));
-  $('#19 time-block').val(localStorage.getItem('19'));
-  $('#20 time-block').val(localStorage.getItem('20'));
+  $('#8').children(1).val(localStorage.getItem('8'));
+  $('#9').children(1).val(localStorage.getItem('9'));
+  $('#10').children(1).val(localStorage.getItem('10'));
+  $('#11').children(1).val(localStorage.getItem('11'));
+  $('#12').children(1).val(localStorage.getItem('12'));
+  $('#13').children(1).val(localStorage.getItem('13'));
+  $('#14').children(1).val(localStorage.getItem('14'));
+  $('#15').children(1).val(localStorage.getItem('15'));
+  $('#16').children(1).val(localStorage.getItem('16'));
+  $('#17').children(1).val(localStorage.getItem('17'));
+  $('#18').children(1).val(localStorage.getItem('18'));
+  $('#19').children(1).val(localStorage.getItem('19'));
+  $('#20').children(1).val(localStorage.getItem('20'));
+
 
 
 });
