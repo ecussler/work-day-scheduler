@@ -21,9 +21,9 @@ NA
 
 This application is day-to-day schedulers and future employers to see my work through JavaScript. 
 
-![Website Sample](./assets/photos/website-screenshot.png)
+![Website Sample](./Assets/Photos/scheduler_screenshot.png)
 
-https://ecussler.github.io/bakers-quizen/
+https://ecussler.github.io/work-day-scheduler/
 
 
 ## Credits
